@@ -79,6 +79,7 @@ commands = '''dir (Shows files in current directory)
 13. docxsearch (Searches your File System for docx files)
 14. mailgen (Generates dummy E-Mail Addresses)
 15. ver (Reports Termithron Version)
+16. clear (clears thats abt it)
 '''
 
 #cd command (work in progress)
@@ -136,8 +137,9 @@ def whatiscommand():
         os.system(cmd)
         main()
     #calculator
-    elif cmd == "calc":
+    elif "calc" in cmd:
         calc()
+        main()
     #password genorator
     elif cmd == "passgen":
         passGen()
@@ -173,6 +175,9 @@ def whatiscommand():
     elif cmd == "mailgen":
         mailGen()
         main()
+    #clear command
+    elif cmd == "clear":
+        clear()
     #else
     else:
         error()
@@ -199,38 +204,40 @@ def getSystemInfo():
     print("System Info Retrieved!")
 #calculator function
 def calc():
-    def add(x, y):
-        return x + y
-    def subtract(x, y):
-        return x - y
-    def multiply(x, y):
-        return x * y
-    def divide(x, y):
-        return x / y
-        print("Select operation.")
-        print("1.Add")
-        print("2.Subtract")
-        print("3.Multiply")
-        print("4.Divide")
-        while True:
-            choice = input("Enter choice(1/2/3/4): ")
-            if choice in ('1', '2', '3', '4'):
-                num1 = float(input("Enter first number: "))
-                num2 = float(input("Enter second number: "))
-                if choice == '1':
-                    print(num1, "+", num2, "=", add(num1, num2))
-                elif choice == '2':
-                    print(num1, "-", num2, "=", subtract(num1, num2))
-                elif choice == '3':
-                    print(num1, "*", num2, "=", multiply(num1, num2))
-                elif choice == '4':
-                    print(num1, "/", num2, "=", divide(num1, num2))
-                next_calculation = input("Let's do next calculation? (yes/no): ")
-                if next_calculation == "no":
-                  main()
-            else:
-                print("Invalid Input")
-                main()
+    #addition
+    if "+" in cmd:
+        numbers = cmd.split()
+        first_number = float(numbers[1])
+        second_number = float(numbers[3])
+        print(first_number + second_number)
+    #subtraction
+    elif "-" in cmd:
+        numbers = cmd.split()
+        first_number = float(numbers[1])
+        second_number = float(numbers[3])
+        print(first_number - second_number)
+    #division
+    elif "/" in cmd:
+        numbers = cmd.split()
+        first_number = float(numbers[1])
+        second_number = float(numbers[3])
+        print(first_number / second_number)
+    #multiplication
+    elif "*" in cmd:
+        numbers = cmd.split()
+        first_number = int(numbers[1])
+        second_number = int(numbers[3])
+        print(first_number * second_number)
+    elif cmd == "calc help":
+        print("proper use of calculator: 1 + 2")
+        print("only two numbers are allowed")
+        print('''supports:
+        1. addition
+        2. subtraction
+        3. division
+        4. multiplication''')
+    else:
+        print('error... use "calc help" for more help')
 #password genorator function
 def passGen():
         characters = string.ascii_letters + string.punctuation  + string.digits
@@ -317,5 +324,8 @@ def mailGen():
         mailGen()
     else:
         main()
-
+#clear command function
+def clear():
+    os.system("cls")
+    main()
 main()
