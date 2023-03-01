@@ -1,6 +1,6 @@
 # PyPrompt 
 
-A replacement multiplatform terminal built in Python.
+A replacement multiplatform terminal built in Python. 
 
 ![image](https://user-images.githubusercontent.com/83835381/199865215-57306158-4444-48c8-856b-1f2095dc4c05.png)
 
