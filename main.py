@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+#
 # PyPrompt - An alternative cross-platform terminal shell made in Python!
 # PyPrompt made by
 #    _             _      _      _            ___    __ ___  
@@ -11,8 +12,7 @@
 # |__/  
 #
 # Based on Termithon by idkDwij
-# Thanks to idkDwij for the base code of Termithon
-# Thanks to BigBoyTaco for fixing the 'calc' command!
+# Testing a new engine! Yay! Finally no more dependence on Termithon
 # Some commands were not made by me, check CREDITS for info about devs
 # btw do not trust anyone named theopensour or thesouropen or theclosedbitter
 # 
@@ -45,6 +45,7 @@
 #                ..~+=...  
 #
 from __future__ import division
+from __future__ import print_function
 import platform
 
 global uname
@@ -57,8 +58,7 @@ from random import choice
 from random import randint
 import socket
 import fnmatch
-from time import *
-from time import sleep
+import time
 import uuid
 import py_compile
 import getpass
@@ -66,14 +66,23 @@ import speedtest
 import geocoder
 import wget
 import pyvim
+# 69 lines nice
+import json
+from http.server import BaseHTTPRequestHandler, HTTPServer
 import requests
 import sys
 import pip
+
 if uname.system == "Windows":
     from ctypes import *
 else:
   pass
-# 69 lines nice
+from blessed import *
+from blessed import Terminal
+
+
+term = Terminal()
+
 
 # Fixes 'distutils' error in PyInstaller
 if not sys.warnoptions:
@@ -90,62 +99,41 @@ hostname = socket.gethostname()
 curr_user = getpass.getuser()
 global echo_on
 
-def warnings():
-    print("THIS IS A BETA BUILD OF PYPROMPT")
-    print("NOTE THAT MOST COMMANDS MIGHT NOT WORK OR BE UNSTABLE")
-    print("IT IS RECOMMENDED TO INSTALL PYTHON FOR BETA BUILDS")
-
 
 # Ten Billion Imports Later...
-joalricha = '''
-    _             _      _      _            ___    __ ___  
-   (_)           | |    (_)    | |          / _ \  / // _ \ 
-    _  ___   __ _| |_ __ _  ___| |__   __ _| (_) |/ /| (_) |
-   | |/ _ \ / _` | | '__| |/ __| '_ \ / _` |> _ <| '_ \__, |
-   | | (_) | (_| | | |  | | (__| | | | (_| | (_) | (_) |/ / 
-   | |\___/ \__,_|_|_|  |_|\___|_| |_|\__,_|\___/ \___//_/  
-  _/ |                                                      
- |__/                                                       
 
-'''
-taco = '''
-
-  ____  _       ____           _______              
- |  _ \(_)     |  _ \         |__   __|             
- | |_) |_  __ _| |_) | ___  _   _| | __ _  ___ ___  
- |  _ <| |/ _` |  _ < / _ \| | | | |/ _` |/ __/ _ \ 
- | |_) | | (_| | |_) | (_) | |_| | | (_| | (_| (_) |
- |____/|_|\__, |____/ \___/ \__, |_|\__,_|\___\___/ 
-           __/ |             __/ |                  
-          |___/             |___/                   
-
-'''
-dwij = '''
-
-  _     _ _    _____           _ _ 
- (_)   | | |  |  __ \         (_|_)
-  _  __| | | _| |  | |_      ___ _ 
- | |/ _` | |/ / |  | \ \ /\ / / | |
- | | (_| |   <| |__| |\ V  V /| | |
- |_|\__,_|_|\_\_____/  \_/\_/ |_| |
-                               _/ |
-                              |__/ 
-
-'''
+global pypromptascii
 pypromptascii = '''
-  _____       _____                           _   
- |  __ \     |  __ \                         | |  
- | |__) |   _| |__) | __ ___  _ __ ___  _ __ | |_ 
- |  ___/ | | |  ___/ '__/ _ \| '_ ` _ \| '_ \| __|
- | |   | |_| | |   | | | (_) | | | | | | |_) | |_ 
- |_|    \__, |_|   |_|  \___/|_| |_| |_| .__/ \__|
-         __/ |                         | |        
-        |___/                          |_|        
-
-'''
-print(pypromptascii)
-print(" ")
-# warnings()
+    _____       _____                           _   
+   |  __ \     |  __ \                         | |  
+   | |__) |   _| |__) | __ ___  _ __ ___  _ __ | |_ 
+   |  ___/ | | |  ___/ '__/ _ \| '_ ` _ \| '_ \| __|
+   | |   | |_| | |   | | | (_) | | | | | | |_) | |_ 
+   |_|    \__, |_|   |_|  \___/|_| |_| |_| .__/ \__|
+           __/ |                         | |        
+          |___/                          |_|        '''
+centerASCII = pypromptascii.center(50)
+print(term.green + centerASCII + term.normal)
+def warnings():
+    warningASCII = '''
+._________________________________________________________________________________.
+|                                                                                 |
+|     db   d8b   db  .d8b.  d8888b. d8b   db d888888b d8b   db  d888b       db    |
+|     88   I8I   88 d8' `8b 88  `8D 888o  88   `88'   888o  88 88' Y8b      88    |
+|     88   I8I   88 88ooo88 88oobY' 88V8o 88    88    88V8o 88 88           YP    |
+|     Y8   I8I   88 88~~~88 88`8b   88 V8o88    88    88 V8o88 88  ooo            |
+|     `8b d8'8b d8' 88   88 88 `88. 88  V888   .88.   88  V888 88. ~8~      db    |
+|      `8b8' `8d8'  YP   YP 88   YD VP   V8P Y888888P VP   V8P  Y888P       YP    |'''
+    print(term.bold_red(warningASCII))
+    print(term.bold_red("|                                                                                 |"))
+    print(term.bold_red("|                                                                                 |"))
+    print(term.bold_red("|                      THIS IS A BETA BUILD OF PYPROMPT                           |"))
+    print(term.bold_red("|            NOTE THAT MOST COMMANDS MIGHT NOT WORK OR BE UNSTABLE                |"))
+    print(term.bold_red("|             IT IS RECOMMENDED TO INSTALL PYTHON FOR BETA BUILDS                 |"))
+    print(term.bold_red("|                                                                                 |"))
+    print(term.bold_red("|_________________________________________________________________________________|"))
+# if not beta build disable 'warnings()'
+warnings()
 print(" ")
 hostnamecomputer = socket.gethostname()
 global current_dir
@@ -157,17 +145,7 @@ def listToString(s):
         str1 += ele
     return str1
 
-
 commands = '''
-  _____       _____                           _     _    _      _       
- |  __ \     |  __ \                         | |   | |  | |    | |      
- | |__) |   _| |__) | __ ___  _ __ ___  _ __ | |_  | |__| | ___| |_ __  
- |  ___/ | | |  ___/ '__/ _ \| '_ ` _ \| '_ \| __| |  __  |/ _ \ | '_ \ 
- | |   | |_| | |   | | | (_) | | | | | | |_) | |_  | |  | |  __/ | |_) |
- |_|    \__, |_|   |_|  \___/|_| |_| |_| .__/ \__| |_|  |_|\___|_| .__/ 
-         __/ |                         | |                       | |    
-        |___/                          |_|                       |_|    
-                                                             
 DIR                     (Integrated dir/ls command. To use vanilla dir on Windows, Enter CMD Mode and type dir.)
 IP                      (Gives you your IP)
 HOSTNAME                (Gives you your Computer's ID)
@@ -186,10 +164,9 @@ DATE                    (Displays date)
 CD                      (Navigate through folders) (NOTE: Applicable on PyPrompt Mode ONLY!. If you use CMD/BASH directories will change)
 IPLOCATION              (Find the physical location of your IP address)
 SPEEDTEST               (Speedtest.net but built into PyPrompt!)
-ENCRYPT                 (Uses the RSA Algorithm to encrypt a message!)
 FILESEARCH              (Searches files via their file name)
 FILEDOWNLOADER          (Download any file via their url)
-UNHELP                  (i'm not sure what this is. it just exists.)
+IDK                     (i'm not sure what this is. it just exists.)
 LOCATOR                 (Locate basically any location in the planet)
 DEVHELP                 (Detailed info about PyPrompt useful for troubleshooting)
 COMPILER                (Compile any standard Python file to a *.pyc format)
@@ -202,15 +179,10 @@ MAGIC8BALL              (A virtual Magic-8-Ball made in Python)
 CREDITS                 (Credits for all commands & dev list)
 TSKMGR                  (TUI Windows Task Manager)
 BSOD                    (Cause a BSOD) Windows Only
-
-PyPrompt Modes:
-
-CMD Mode (If usual Windows Shell commands are broken in PyPrompt, just use the 'cmd' command and you are in vanilla Command Prompt.)
-         (NOTE: You are still in the PyPrompt App. Exit by typing exit in CMD Mode)
-Bash Mode (Same as CMD Mode but you can run UNIX commands. Again, this is just a sidemode. You can return by typing exit or logoff.)
+WIFIPASS                (Get the password from your WiFi) Windows Only
+LOCALHOSTER             (Create a localhost webserver via the terminal)
 
 '''
-
 
 def whatiscommand(current_dir):
     args = cmd.split()
@@ -272,10 +244,7 @@ def whatiscommand(current_dir):
     elif cmd == "iplocation":
         iplocation()
         main(current_dir)
-    elif "encrypt" in cmd:
-        encryptdecrypt()
-        main(current_dir)
-    elif cmd == "unhelp":
+    elif cmd == "idk":
         print("The command is 'ignore'")
         main(current_dir)
     elif "cd" in cmd:
@@ -309,6 +278,9 @@ def whatiscommand(current_dir):
     elif cmd == "compiler":
         pyCompiler()
         main(current_dir)
+    elif cmd == "wifipass":
+        heckWifi()
+        main(current_dir)
     elif cmd == "ezformat":
         ezformatter()
         main(current_dir)
@@ -332,6 +304,15 @@ def whatiscommand(current_dir):
             bsod()
         else:
             print("BSOD is only supported on Windows")
+            main(current_dir)
+    elif cmd == "shutdown":
+        shutdown()
+        main(current_dir)
+    elif cmd == "welcome":
+        welcome()
+        main(current_dir)
+    elif cmd == "localhoster":
+        localhoster()
         main(current_dir)
     elif str(cmd) in cmd:
         print("This MUST be a shell command in the OS else your command won't work!")
@@ -339,7 +320,6 @@ def whatiscommand(current_dir):
         main(current_dir)
     else:
         error()
-
 
 def main(current_dir):
     global main
@@ -429,11 +409,10 @@ def clear():
 
 def error():
 
-# LMAO 420 lines
-
     if (cmd == ""):
         main(current_dir)
     else:
+        # LMAO 420 lines
         print("'" + str(cmd) + "'" + ''' is not recognized as an internal or external command''')
         print("For more help go to: https://github.com/joalricha869/PyPrompt or https://github.com/IdkDwij/Termithon")
         main(current_dir)
@@ -479,7 +458,7 @@ def progressbar():
 
     loadbar(0, l, prefix='Generating...', suffix='Done!', length=l)
     for i, item in enumerate(items):
-        sleep(0.1)
+        time.sleep(0.1)
         loadbar(i + 1, l, prefix='Generating...', suffix='Done!', length=l)
 
 
@@ -521,17 +500,17 @@ def speedtestapp():
     Your choice: '''))
 
     if option < 1 or option > 4:
-        sleep(2)
-        print('You have entered wrong choice, please enter again with values from 1 to 4')
+        time.sleep(2)
+        print('Option Non-Existent')
     else:
-        sleep(1)
+        time.sleep(1)
         print()
-        print('Pls wait, test in progress...')
+        print('Testing your Internet Download Speeds')
         print()
         down_speed = round(speed.download() / 1000000, 3)
         up_speed = round(speed.upload() / 1000000, 3)
         print('One more sec please...')
-        sleep(1.5)
+        time.sleep(1.5)
         print()
         if option == 1:
             print('Your Download speed is: ', down_speed, 'Mbps')
@@ -546,192 +525,13 @@ def speedtestapp():
             speed.get_servers(s)
             print(speed.results.ping, 'ms')
         else:
-            print("Either you have a VERY unstable internet connection or you don't have internet. Please try again...")
+            print("Test Failed: Couldn't connect to Speedtest")
 
 
 def iplocation():
     g = geocoder.ipinfo('me')
     print(g.latlng)
 
-
-def encryptdecrypt():
-    def isPrime(n):
-        prime = [True for i in range(n + 1)]
-        p = 2
-        while p * p <= n:
-            if prime[p] == True:
-                for i in range(p * p, n + 1, p):
-                    prime[i] = False
-            p += 1
-
-        return prime[n]
-
-    def gcd(a, b):
-        while b != 0:
-            r = a % b
-            a = b
-            b = r
-        return a
-
-    def Multiplicative_inverse(a, b):
-        s1 = 1
-        s2 = 0
-        m = b
-        while b != 0:
-            q = a // b
-            r = a % b
-            a = b
-            b = r
-            s = s1 - q * s2
-            s1 = s2
-            s2 = s
-
-        if s1 < 0:
-            s1 += m
-
-        return s1
-
-    def powermod(x, y, p):
-        res = 1
-
-        x = x % p
-        while (y > 0):
-
-            if (y % 2) == 1:
-                res = (res * x) % p
-
-            y = y // 2
-            x = (x * x) % p
-
-        return res
-
-    if __name__ == '__main__':
-        while (True):
-            res = input(
-                'Do you want to enter prime numbers (y) or let the algorithm do it for you (n) or exit (e)? (y/n/e): ')
-            if res == 'y':
-                while True:
-                    p = 13
-                    p = int(input('Enter a prime number: '))
-                    if isPrime(p):
-                        break
-                    else:
-                        print(p, 'is not a prime number')
-                        continue
-
-                while True:
-                    q = 17
-                    q = int(input('Enter a different prime number: '))
-                    if isPrime(q) and (p * q > 26):
-                        break
-                    else:
-                        print(
-                            'Both the prime numbers are same!! or product of both the prime numbers is less than 26!!')
-                        continue
-
-                n = p * q
-                phi_n = (p - 1) * (q - 1)
-                a = 19
-                while True:
-                    a = int(input('Enter a number such that Greatest Common Divisor of that number with ' + str(
-                        phi_n) + ' is 1: '))
-                    if gcd(a, phi_n) != 1:
-                        continue
-                    else:
-                        break
-
-                b = Multiplicative_inverse(a, phi_n)
-                message = input('Enter the message to be encrypted (lower case): ')
-                message = message.lower()
-
-                encrypted_string = ""
-                encrypted_num = []
-
-                for i in range(len(message)):
-                    ch = message[i]
-                    if ch != ' ':
-                        m = ord(ch) - 97
-                        e = powermod(m, a, n)
-                        encrypted_num.append(e)
-                        encrypted_string += chr(e % 26 + 97)
-                    else:
-                        encrypted_string += ' '
-
-                print('Encrypted message is:', encrypted_string)
-                print(encrypted_num)
-                res = input("Do you want to decrypt it too? (y/n): ")
-                if res == 'y':
-                    decrypted = ''
-                    j = 0
-                    for i in range(len(encrypted_string)):
-                        ch = message[i]
-                        if ch != ' ':
-                            e = encrypted_num[j]
-                            m = powermod(e, b, n)
-                            ch = chr(m + 97)
-                            decrypted += ch
-                            j += 1
-                        else:
-                            decrypted += ' '
-
-                    print("Decrypted message is:", decrypted)
-                else:
-                    ans = input("Do you want to continue? (y/n): ")
-                    if ans == 'y':
-                        continue
-                    else:
-                        break
-
-            elif res == 'n':
-                p = 13
-                q = 17
-                n = p * q
-                a = 5
-                b = 77
-                message = input('Enter the message to be encrypted (lower case): ')
-                message = message.lower()
-
-                encrypted_string = ""
-                encrypted_num = []
-
-                for i in range(len(message)):
-                    ch = message[i]
-                    if ch != ' ':
-                        m = ord(ch) - 97
-                        e = powermod(m, a, n)
-                        encrypted_num.append(e)
-                        encrypted_string += chr(e % 26 + 97)
-                    else:
-                        encrypted_string += ' '
-
-                print('Encrypted message is:', encrypted_string)
-                res = input("Do you want to decrypt it too? (y/n): ")
-                if res == 'y':
-                    decrypted = ''
-                    j = 0
-                    for i in range(len(encrypted_string)):
-                        ch = encrypted_string[i]
-                        if ch != ' ':
-                            e = encrypted_num[j]
-                            m = powermod(e, b, n)
-                            ch = chr(m + 97)
-                            decrypted += ch
-                            j += 1
-                        else:
-                            decrypted += ' '
-
-                    print("Decrypted message is:", decrypted)
-                else:
-                    ans = input("Do you want to continue? (y/n): ")
-                    if ans == 'y':
-                        continue
-                    else:
-                        break
-            elif res == 'e':
-                break
-            else:
-                print('Invalid command!')
-                continue
 
 def fileSearch():
     rootPath = '/'
@@ -920,6 +720,41 @@ def magic8Ball():
 
     M8B()
 
+joalricha = '''
+    _             _      _      _            ___    __ ___  
+   (_)           | |    (_)    | |          / _ \  / // _ \ 
+    _  ___   __ _| |_ __ _  ___| |__   __ _| (_) |/ /| (_) |
+   | |/ _ \ / _` | | '__| |/ __| '_ \ / _` |> _ <| '_ \__, |
+   | | (_) | (_| | | |  | | (__| | | | (_| | (_) | (_) |/ / 
+   | |\___/ \__,_|_|_|  |_|\___|_| |_|\__,_|\___/ \___//_/  
+  _/ |                                                      
+ |__/                                                       
+
+'''
+taco = '''
+
+  ____  _       ____           _______              
+ |  _ \(_)     |  _ \         |__   __|             
+ | |_) |_  __ _| |_) | ___  _   _| | __ _  ___ ___  
+ |  _ <| |/ _` |  _ < / _ \| | | | |/ _` |/ __/ _ \ 
+ | |_) | | (_| | |_) | (_) | |_| | | (_| | (_| (_) |
+ |____/|_|\__, |____/ \___/ \__, |_|\__,_|\___\___/ 
+           __/ |             __/ |                  
+          |___/             |___/                   
+
+'''
+dwij = '''
+
+  _     _ _    _____           _ _ 
+ (_)   | | |  |  __ \         (_|_)
+  _  __| | | _| |  | |_      ___ _ 
+ | |/ _` | |/ / |  | \ \ /\ / / | |
+ | | (_| |   <| |__| |\ V  V /| | |
+ |_|\__,_|_|\_\_____/  \_/\_/ |_| |
+                               _/ |
+                              |__/ 
+
+'''
 
 def credits():
     pyCredits = '''
@@ -1003,7 +838,7 @@ def miniTskMgr():
         print(database)
         miniTskMgr()
 
-y = "1.6.1.stable"
+y = "1.7.beta1"
 
 def ver():
     print("PyPrompt Version: " + y)
@@ -1028,7 +863,6 @@ def bsod():
         byref(c_uint())
     )
 
-# Shutdown Code (To Be Released in v1.6.2)
 def shutdown():
     print("Shutdown / Reboot your PC")
     print("(S)hutdown")
@@ -1047,12 +881,91 @@ def shutdown():
               os.system("shutdown /r /t 1")
           else:
               os.system("sudo reboot")
-        
+    elif why == "s":
+            osDetector = platform.uname()
+            if osDetector.system == "Windows":
+                os.system("shutdown /s /t 0")
+            else:
+                os.system("sudo shutdown now -h")
+    elif why == "r":
+          osDetector = platform.uname()
+          if osDetector.system == "Windows":
+              os.system("shutdown /r /t 1")
+          else:
+              os.system("sudo reboot")
+    else:
+        print("ERROR CODE: NONEXISTENT_OPTION")
+        print("Booting back to PyPrompt Console")
+        main(current_dir)
 
-# Changes from 1.6.1.release.candidate.1
+def welcome():
+    print("Just confused on what to do?")
+    input("Press Enter to Continue...")
+    print("Well then, let me show you around!")
+    input("To Begin, Press Enter...")
+    os.system('cls||clear')
+    print("Introduction")
+    print(" ")
+    print("To use PyPrompt, just type in a command.")
+    print("The list of commands is available in the 'help' command")
+    input("Press Enter to Continue...")
+    os.system('cls||clear')
+    print("That's it.")
+    print("For real, what do you expect out of a CLI app.")
+    print("Oh well i have better things to do XD")
+    print("Im outta here!")
+    input("Press Enter to Use PyPrompt...")
+    os.system('cls||clear')
+    print('Exiting "Tutorial" in 3')
+    time.sleep(1)
+    os.system('cls||clear')
+    print('Exiting "Tutorial" in 2')
+    time.sleep(1)
+    os.system('cls||clear')
+    print('Exiting "Tutorial" in 1')
+    time.sleep(1)
+    os.system('cls||clear')
+    main(current_dir)
+
+def heckWifi():
+    print("View Wifi Password (Windows Only)")
+    print(" ")
+    print("NOTE: This only works on networks you have connected to or are currently connected to.")
+    print("DISCLAIMER: Please do NOT use this tool to get another network's password.")
+    SSID = input("Enter the SSID of the network: ")
+    os.system('netsh wlan show profile name=' + SSID + ' key=clear | find "Key Content"')
+    time.sleep(5)
+    main(current_dir)
+
+def localhoster():
+    class Serv(BaseHTTPRequestHandler):
+
+        def do_GET(self):
+            if self.path == '/':
+                self.path = '/test.html'
+            try:
+                file_to_open = open(self.path[1:]).read()
+                self.send_response(200)
+            except:
+                file_to_open = "File not found"
+                self.send_response(404)
+            self.end_headers()
+            self.wfile.write(bytes(file_to_open, 'utf-8'))
+
+    httpd = HTTPServer(('localhost',8080),Serv)
+    httpd.serve_forever()
+
+
+# Changes from 1.6.1.stable
 # ____________________________________________________________________
-# - Bug Fixes
+# - Added shutdown command
+# - Changed some strings in Speedtest
+# - Added wifipass command
+# - Changed sleep(x) to time.sleep(x) for Speedtest
+# - Changed strings in wifipass + updated disclaimer
+# - Added ChatGPT command (canceled because API doesn't work)
+# - Added localhoster command
+# - Removed encrypt command due to it being useless
 
-  
-# Run this piece of crap
+
 main(current_dir)
