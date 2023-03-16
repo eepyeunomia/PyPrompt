@@ -14,6 +14,10 @@ A replacement multiplatform terminal built in Python.
 
 ### Engine based on [Termithon | idkDwij](https://github.com/IdkDwij/Termithon)
 
+For version 2.0 of PyPrompt, I am planning to make new engine NOT based on Termithon for once!
+
+When v2 releases, this repo will be read only and archived!
+
 ## Run this in your PC
 
 PYPROMPT DEVELOPMENT, BETA BUILDS, UNCOMPILED BUILDS
