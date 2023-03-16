@@ -104,7 +104,7 @@ Bash Mode (Same as CMD Mode but you can run UNIX commands. Again, this is just a
 
 Windows: Supports Windows 10 or 8.1
 
-Linux: Any Linux distro (requires python) (uncompiled build, don't think i'm going to compile for linux...)
+Linux: Coming soon!
 
 macOS: There is no current build now (yet)
 
