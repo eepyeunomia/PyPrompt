@@ -108,7 +108,7 @@ Bash Mode (Same as CMD Mode but you can run UNIX commands. Again, this is just a
 
 Windows: Supports Windows 10 or 8.1
 
-Linux: Coming soon!
+Linux: IT'S HERE!!! CHECK THE RELEASES FOR 1.7.beta1 (.deb and .rpm coming soon!)
 
 macOS: There is no current build now (yet)
 
