@@ -872,11 +872,6 @@ def miniTskMgr():
         print(database)
         miniTskMgr()
 
-y = "1.7.beta1"
-
-def ver():
-    print("PyPrompt Version: " + y)
-    print("(C) 2023 joalricha869, All Rights Reserved.")
 
 def bsod():
     nullptr = POINTER(c_int)()
@@ -990,9 +985,17 @@ def localhoster():
     httpd.serve_forever()
 
 
-# Changes from 1.7.beta1
+# Changes from 1.7.beta1.quickfix1
 # ____________________________________________________________________
 # - Added separate help text for Linux & Windows
+# - Submitted wrong version to GitHub
 
+
+# Change Version Number in for ver()
+y = "1.7.beta1.quickfix2"
+
+def ver():
+    print("PyPrompt Version: " + y)
+    print("(C) 2023 joalricha869, All Rights Reserved.")
 
 main(current_dir)
