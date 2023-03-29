@@ -184,6 +184,40 @@ LOCALHOSTER             (Create a localhost webserver via the terminal)
 
 '''
 
+linuxcommands='''
+DIR                     (Integrated dir/ls command. To use vanilla dir on Windows, Enter CMD Mode and type dir.)
+IP                      (Gives you your IP)
+HOSTNAME                (Gives you your Computer's ID)
+MAC                     (Retrieves the Physical MAC Address of The Device)
+PING                    (lets you ping a website)
+CALC                    (A simple CLI calculator)
+PASSGEN                 (A very efficient password generator)
+SYSINFO                 (Gets relevant system info)
+TEST                    (Tests PyPrompt Sample Command)
+MAILGEN                 (Generates dummy E-Mail Addresses)
+VER                     (Reports PyPrompt Version)
+CLEAR                   (Clears screen)
+INTRO                   (Displays initial text)
+SQRT                    (Enter a number and it will calculate the square root)
+DATE                    (Displays date)
+CD                      (Navigate through folders) (NOTE: Applicable on PyPrompt Mode ONLY!. If you use CMD/BASH directories will change)
+IPLOCATION              (Find the physical location of your IP address)
+SPEEDTEST               (Speedtest.net but built into PyPrompt!)
+FILESEARCH              (Searches files via their file name)
+FILEDOWNLOADER          (Download any file via their url)
+IDK                     (i'm not sure what this is. it just exists.)
+LOCATOR                 (Locate basically any location in the planet)
+DEVHELP                 (Detailed info about PyPrompt useful for troubleshooting)
+COMPILER                (Compile any standard Python file to a *.pyc format)
+PYVIM                   (Vim clone 'MADE BY jonathanslenders On GitHub') WILL REQUIRE PYTHON!!
+PYINSTALLER             (Another Python compiler) REQUIRES PYTHON AND PYINSTALLER TO BE INSTALLED!
+WEATHER                 (Gets the weather from any city) Made by imkaka. Github: https://github.com/imkaka
+MAGIC8BALL              (A virtual Magic-8-Ball made in Python)
+CREDITS                 (Credits for all commands & dev list)
+LOCALHOSTER             (Create a localhost webserver via the terminal) (REAQUIRES A FILE NAMED test.html to runs)
+
+'''
+
 def whatiscommand(current_dir):
     args = cmd.split()
     if cmd == 'help':
@@ -956,16 +990,9 @@ def localhoster():
     httpd.serve_forever()
 
 
-# Changes from 1.6.1.stable
+# Changes from 1.7.beta1
 # ____________________________________________________________________
-# - Added shutdown command
-# - Changed some strings in Speedtest
-# - Added wifipass command
-# - Changed sleep(x) to time.sleep(x) for Speedtest
-# - Changed strings in wifipass + updated disclaimer
-# - Added ChatGPT command (canceled because API doesn't work)
-# - Added localhoster command
-# - Removed encrypt command due to it being useless
+# - Added separate help text for Linux & Windows
 
 
 main(current_dir)
