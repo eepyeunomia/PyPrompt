@@ -2,8 +2,7 @@
 
 A replacement multiplatform terminal built in Python. 
 
-![image](https://user-images.githubusercontent.com/83835381/199865215-57306158-4444-48c8-856b-1f2095dc4c05.png)
-
+![pyprompt](https://user-images.githubusercontent.com/83835381/229126548-31d2ed01-cd67-43e5-a839-dea50ca394af.jpg)
 
 <a href="https://heroku.com/deploy/?template=https://github.com/joalricha869/PyPrompt"><img alt="Deploy to Heroku" src="https://binbashbanana.github.io/deploy-buttons/buttons/remade/heroku.svg"></a>
 <a href="https://replit.com/github/joalricha869/PyPrompt"><img src="https://raw.githubusercontent.com/BinBashBanana/deploy-buttons/master/buttons/remade/replit.svg" alt="Deploy On Replit"></a>
@@ -20,15 +19,13 @@ When v2 releases, this repo will be read only and archived!
 
 ## Run this in your PC
 
-PYPROMPT DEVELOPMENT, BETA BUILDS, UNCOMPILED BUILDS
-
-_________________________________________________________
+#### PYPROMPT DEVELOPMENT, BETA BUILDS, UNCOMPILED BUILDS
 
 Install [Python](https://python.org) and [Visual Studio Code](https://code.visualstudio.com) (ONLY FOR PYPROMPT DEVELOPMENT)
 
-STABLE VERSIONS (CURRENTLY ON 1.6.1)
 
-_________________________________________________________
+#### STABLE VERSIONS (CURRENTLY ON 1.6.1)
+
 
 Download the binary in the Releases tab. Nothing else. (PYVIM AND PYINSTALLER REQUIRE PYTHON)
 
@@ -77,10 +74,9 @@ DATE                    (Displays date)
 CD                      (Navigate through folders) (NOTE: Applicable on PyPrompt Mode ONLY!. If you use CMD/BASH directories will change)
 IPLOCATION              (Find the physical location of your IP address)
 SPEEDTEST               (Speedtest.net but built into PyPrompt!)
-ENCRYPT                 (Uses the RSA Algorithm to encrypt a message!)
 FILESEARCH              (Searches files via their file name)
 FILEDOWNLOADER          (Download any file via their url)
-UNHELP                  (i'm not sure what this is. it just exists.)
+IDK                     (i'm not sure what this is. it just exists.)
 LOCATOR                 (Locate basically any location in the planet)
 DEVHELP                 (Detailed info about PyPrompt useful for troubleshooting)
 COMPILER                (Compile any standard Python file to a *.pyc format)
@@ -93,14 +89,8 @@ MAGIC8BALL              (A virtual Magic-8-Ball made in Python)
 CREDITS                 (Credits for all commands & dev list)
 TSKMGR                  (TUI Windows Task Manager)
 BSOD                    (Cause a BSOD) Windows Only
-
-
-PyPrompt Modes:
-
-CMD Mode (If usual Windows Shell commands are broken in PyPrompt, just use the 'cmd' command and you are in vanilla Command Prompt.)
-         (NOTE: You are still in the PyPrompt App. Exit by typing exit in CMD Mode)
-Bash Mode (Same as CMD Mode but you can run UNIX commands. Again, this is just a sidemode. You can return by typing exit or logoff.)
-
+WIFIPASS                (Get the password from your WiFi) Windows Only
+LOCALHOSTER             (Create a localhost webserver via the terminal)
 '''
 ```
 
