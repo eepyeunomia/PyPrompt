@@ -12,7 +12,7 @@
 # |__/  
 #
 # Based on Termithon by idkDwij
-# Testing a new engine! Yay! Finally no more dependence on Termithon
+# Testing a new engine! Yay! Finally no more dependence on Termithon (i hope lol)
 # Some commands were not made by me, check CREDITS for info about devs
 # btw do not trust anyone named theopensour or thesouropen or theclosedbitter
 # 
@@ -66,7 +66,7 @@ import speedtest
 import geocoder
 import wget
 import pyvim
-# 69 lines nice
+# 69 lines nice lol
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import requests
@@ -221,7 +221,10 @@ LOCALHOSTER             (Create a localhost webserver via the terminal) (REAQUIR
 def whatiscommand(current_dir):
     args = cmd.split()
     if cmd == 'help':
-        print(commands)
+        if uname.system == "Windows":
+            print(commands)
+        else:
+            print(linuxcommands)
         main(current_dir)
     elif cmd == 'dir':
         print(os.listdir(current_dir))
@@ -414,6 +417,7 @@ def passGen():
     print("Is your Generated Password: ", password)
     repeatGen = input("Generate another one? ")
     if repeatGen == "yes":
+        # 420 lines lol
         passGen()
     else:
         main(current_dir)
@@ -988,11 +992,13 @@ def localhoster():
 # Changes from 1.7.beta1.quickfix1
 # ____________________________________________________________________
 # - Added separate help text for Linux & Windows
-# - Submitted wrong version to GitHub
+# - If a UNIX system is detected, then linuxcommands variable will be printed, else normal commands will be printed
+# - For quickfix builds, I will compile them and replace binaries of old version with patched version. (Executables will be archived tho)
 
 
 # Change Version Number in for ver()
 y = "1.7.beta1.quickfix2"
+# 1000 lines of code!
 
 def ver():
     print("PyPrompt Version: " + y)
