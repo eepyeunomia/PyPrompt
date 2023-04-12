@@ -177,7 +177,6 @@ EZTASKKILL              (Eliminate some process without using the task mamager) 
 WEATHER                 (Gets the weather from any city) Made by imkaka. Github: https://github.com/imkaka
 MAGIC8BALL              (A virtual Magic-8-Ball made in Python)
 CREDITS                 (Credits for all commands & dev list)
-TSKMGR                  (TUI Windows Task Manager)
 BSOD                    (Cause a BSOD) Windows Only
 WIFIPASS                (Get the password from your WiFi) Windows Only
 LOCALHOSTER             (Create a localhost webserver via the terminal)
@@ -215,12 +214,15 @@ WEATHER                 (Gets the weather from any city) Made by imkaka. Github:
 MAGIC8BALL              (A virtual Magic-8-Ball made in Python)
 CREDITS                 (Credits for all commands & dev list)
 LOCALHOSTER             (Create a localhost webserver via the terminal) (REAQUIRES A FILE NAMED test.html to runs)
+DEBMAKER                (Creates a Debian package based on a Unix Executable)
 
 '''
 
 def whatiscommand(current_dir):
     args = cmd.split()
     if cmd == 'help':
+        global uname
+        uname = platform.uname()
         if uname.system == "Windows":
             print(commands)
         else:
@@ -332,9 +334,6 @@ def whatiscommand(current_dir):
         main(current_dir)
     elif cmd == "magic8ball":
         magic8Ball()
-    elif cmd == "tskmgr":
-        miniTskMgr()
-        main(current_dir)
     elif cmd == "bsod":
         var1 = platform.uname()
         if var1.system == "Windows":
@@ -351,6 +350,9 @@ def whatiscommand(current_dir):
     elif cmd == "localhoster":
         localhoster()
         main(current_dir)
+    elif cmd == "debmaker":
+        debMaker()
+        main(current_dir)
     elif str(cmd) in cmd:
         print("This MUST be a shell command in the OS else your command won't work!")
         os.system(cmd)
@@ -366,14 +368,22 @@ def main(current_dir):
     cmd = input(current_dir + '>')
     whatiscommand(current_dir)
 
+global osver
+osver = platform.platform()
+
+global architecture
+architecture = platform.architecture()
+
 def getSystemInfo():
     print("=" * 40, "System Information", "=" * 40)
-    print(f"System: {uname.system}")
+    print(f"System Base: {uname.system}")
+    print(f"Operating System Version: {osver}")
     print(f"Node Name: {uname.node}")
     print(f"Release: {uname.release}")
     print(f"Version: {uname.version}")
     print(f"Machine: {uname.machine}")
     print(f"Processor: {uname.processor}")
+    print(f"Processor Architecture: {architecture}")
     print("System Info Retrieved!")
 
 
@@ -595,9 +605,10 @@ def locator():
 def devHelp():
     print("----------PyPrompt System Details----------\n")
     print("PYPROMPT VERSION: " + y)
-    print("TERMITHON KERNEL VERSION: 0.1.3 (RELEASE-SKU)")
-    print("CODENAME: DWIJ_DIED_IN_NJ")
+    print("TERMITHON KERNEL VERSION: 0.1.4 (MODIFIED)")
+    print("CODENAME: ARCH")
     print(f"OPERATING SYSTEM: {uname.system}")
+    print(f"OS VERSION: {osver}")
 
 
 def pyCompiler():
@@ -823,59 +834,6 @@ LICENSE: GPL 3.0 | https://www.gnu.org/licenses/gpl-3.0.en.html
     print("SOME COMMANDS ARE MADE BY OTHER PEOPLE!")
     print("READ CREDITS ABOVE FOR MORE INFO")
 
-def miniTskMgr():
-    chrome = "chrome.exe"
-    itunes = "itunes.exe"
-    vscode = "code.exe"
-    firefox = "firefox.exe"
-    javawindowed = "javaw.exe"
-    print("Windows TUI Task Manager")
-    print(" ")
-    print("In the future you will be able to name the actual app instead of naming the actual process.")
-    print("1) Show Process List")
-    print("2) Eliminate Specific Process")
-    print("3) Return to PyPrompt")
-    print("4) Show Process Database (BETA)")
-    tskCmd = "taskkill /f /im "
-    mgr = input("Select Option: ")
-    if mgr == "1":
-        os.system("tasklist")
-        miniTskMgr()
-    elif mgr == "2":
-        print(" ")
-        print("1) Process Executable Name Mode")
-        print("2) App Name Mode (Beta)")
-        tskSel = input("Select Mode: ")
-        if tskSel == "1":
-            global task
-            task = input("Input the name of the process you want to eliminate: ")
-            os.system("taskkill /f /im " + task)
-        else:
-            print("Make sure to check the database first")
-            app = input("Process Name: ")
-            if app == "Google Chrome":
-                os.system(tskCmd + chrome)
-                main(current_dir)
-            elif app == "Visual Studio Code":
-                os.system(tskCmd + vscode)
-                main(current_dir)
-            elif app == "JavaWindowed":
-                os.system(tskCmd + javawindowed)
-                main(current_dir)
-            else:
-                print("The app name you typed either is not in the database or spelled incorrectly")
-            miniTskMgr()
-    elif mgr == "3":
-        main(current_dir)
-    elif mgr == "4":
-        database = '''
-        Google Chrome
-        Visual Studio Code 
-        JavaWindowed (javaw.exe)
-        '''
-        print(database)
-        miniTskMgr()
-
 
 def bsod():
     nullptr = POINTER(c_int)()
@@ -988,17 +946,40 @@ def localhoster():
     httpd = HTTPServer(('localhost',8080),Serv)
     httpd.serve_forever()
 
+def debMaker():
+    print("Debian Package Builder Utility (Ubuntu Only!)\n")
+    print("Before starting, make sure that these dependencies are installed!")
+    dependencies = '''
+    python2.7
+    python-wxgtk3 OR python-wxgtk2.8
+    python-wxversion
+    dpkg
+    fakeroot
+    coreutils
+    '''
+    print(term.bold_red(dependencies))
+    install = input("Install dependencies?: ")
+    if install == y:
+        os.system("sudo apt-get install python2.7 python-wxgtk3 python-wxversion dpkg fakeroot coreutils lintian")
+    else:
+        print("Well, i'm assuming that EVERY PACKAGE is installed!")
+    os.system("sudo dpkg -i https://github.com/debreate/debreate/releases/download/v0.7.13/debreate_0.7.13_all.deb")
+    os.system("sudo apt-get install -f")
+    print("Check your applications, there should be a new icon. Follow instructions and you have created your .deb file!")
 
-# Changes from 1.7.beta1.quickfix1
+
+# Changes from 1.7.beta1.quickfix2
 # ____________________________________________________________________
-# - Added separate help text for Linux & Windows
-# - If a UNIX system is detected, then linuxcommands variable will be printed, else normal commands will be printed
-# - For quickfix builds, I will compile them and replace binaries of old version with patched version. (Executables will be archived tho)
-
+# - Changed strings in Help
+# - Added separate help for UNIX based systems
+# - Removed TUI Task Manager
+# - Added DEBMAKER
+# - Modified Termithon Kernel to support OS Difference Commands (0.1.4)
+# - Added more strings in SYSINFO and DEVHELP
 
 # Change Version Number in for ver()
-y = "1.7.beta1.quickfix2"
-# 1000 lines of code!
+
+y = "1.7.beta2"
 
 def ver():
     print("PyPrompt Version: " + y)
