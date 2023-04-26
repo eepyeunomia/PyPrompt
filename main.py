@@ -966,18 +966,6 @@ def chatGPT():
     openaiKey = openai.api_key
     if uname.system == "Linux":
         os.system("export OPENAI_API_KEY='" + openaiKey + "'")
-        print("You will have to restart PyPrompt...")
-        time.sleep(2)
-        os.system("clear")
-        print("Restarting in 3 seconds...")
-        time.sleep(1)
-        os.system("clear")
-        print("Restarting in 2 seconds...")
-        time.sleep(1)
-        os.system("clear")
-        print("Restarting in 1 seconds...")
-        time.sleep(1)
-        exit()
     else:
         pass
 
@@ -1013,12 +1001,11 @@ def chatGPT():
 
 
 
-# Changes from 1.7.beta2
+# Changes from 1.7.rc1
 # ____________________________________________________________________
-# - Removed debmaker() {DIDN'T WORK}
-# - Added ChatGPT
+# - QUICK FIX: Fixed Linux Loophole
 
-y = "1.7.rc1"
+y = "1.7.rc1.quickfix1"
 
 def ver():
     print("PyPrompt Version: " + y)
