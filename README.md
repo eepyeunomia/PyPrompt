@@ -91,6 +91,7 @@ TSKMGR                  (TUI Windows Task Manager)
 BSOD                    (Cause a BSOD) Windows Only
 WIFIPASS                (Get the password from your WiFi) Windows Only
 LOCALHOSTER             (Create a localhost webserver via the terminal)
+CHATGPT                 (ChatGPT in a Terminal) Requires OpenAI
 '''
 ```
 
