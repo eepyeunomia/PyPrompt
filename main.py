@@ -72,6 +72,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import requests
 import sys
 import pip
+import openai
 
 if uname.system == "Windows":
     from ctypes import *
@@ -180,6 +181,7 @@ CREDITS                 (Credits for all commands & dev list)
 BSOD                    (Cause a BSOD) Windows Only
 WIFIPASS                (Get the password from your WiFi) Windows Only
 LOCALHOSTER             (Create a localhost webserver via the terminal)
+CHATGPT                 (ChatGPT in a Terminal) Requires OpenAI
 
 '''
 
@@ -214,7 +216,7 @@ WEATHER                 (Gets the weather from any city) Made by imkaka. Github:
 MAGIC8BALL              (A virtual Magic-8-Ball made in Python)
 CREDITS                 (Credits for all commands & dev list)
 LOCALHOSTER             (Create a localhost webserver via the terminal) (REAQUIRES A FILE NAMED test.html to runs)
-DEBMAKER                (Creates a Debian package based on a Unix Executable)
+CHATGPT                 (ChatGPT in a Terminal)
 
 '''
 
@@ -350,8 +352,8 @@ def whatiscommand(current_dir):
     elif cmd == "localhoster":
         localhoster()
         main(current_dir)
-    elif cmd == "debmaker":
-        debMaker()
+    elif cmd == "chatgpt" or "chatGPT" or "ChatGPT":
+        chatGPT()
         main(current_dir)
     elif str(cmd) in cmd:
         print("This MUST be a shell command in the OS else your command won't work!")
@@ -511,7 +513,7 @@ def progressbar():
 
 
 def intro():
-    print(pypromptascii)
+    print(term.green + centerASCII + term.normal)
     print(" ")
     warnings()
     print(" ")
@@ -946,40 +948,77 @@ def localhoster():
     httpd = HTTPServer(('localhost',8080),Serv)
     httpd.serve_forever()
 
-def debMaker():
-    print("Debian Package Builder Utility (Ubuntu Only!)\n")
-    print("Before starting, make sure that these dependencies are installed!")
-    dependencies = '''
-    python2.7
-    python-wxgtk3 OR python-wxgtk2.8
-    python-wxversion
-    dpkg
-    fakeroot
-    coreutils
-    '''
-    print(term.bold_red(dependencies))
-    install = input("Install dependencies?: ")
-    if install == y:
-        os.system("sudo apt-get install python2.7 python-wxgtk3 python-wxversion dpkg fakeroot coreutils lintian")
+global chatgptascii
+chatgptascii = '''
+   _____ _           _    _____ _____ _______ 
+  / ____| |         | |  / ____|  __ \__   __|
+ | |    | |__   __ _| |_| |  __| |__) | | |   
+ | |    | '_ \ / _` | __| | |_ |  ___/  | |   
+ | |____| | | | (_| | |_| |__| | |      | |   
+  \_____|_| |_|\__,_|\__|\_____|_|      |_|   
+                                              
+'''
+
+
+def chatGPT():
+    apiKey = input("Type in your OpenAI API Key")
+    openai.api_key = apiKey
+    openaiKey = openai.api_key
+    if uname.system == "Linux":
+        os.system("export OPENAI_API_KEY='" + openaiKey + "'")
+        print("You will have to restart PyPrompt...")
+        time.sleep(2)
+        os.system("clear")
+        print("Restarting in 3 seconds...")
+        time.sleep(1)
+        os.system("clear")
+        print("Restarting in 2 seconds...")
+        time.sleep(1)
+        os.system("clear")
+        print("Restarting in 1 seconds...")
+        time.sleep(1)
+        exit()
     else:
-        print("Well, i'm assuming that EVERY PACKAGE is installed!")
-    os.system("sudo dpkg -i https://github.com/debreate/debreate/releases/download/v0.7.13/debreate_0.7.13_all.deb")
-    os.system("sudo apt-get install -f")
-    print("Check your applications, there should be a new icon. Follow instructions and you have created your .deb file!")
+        pass
+
+        print(chatgptascii)
+        print("Hello, i'm ChatGPT.")
+        print("Currently supports GPT-3.5 Turbo & GPT4")
+        print("Options: 'gpt3' | 'gpt4'")
+        global model
+        model = input("Which model will you use? ")
+        if model == "gpt3":
+            model = "gpt-3.5-turbo"
+        elif model == "gpt4":
+            model = "gpt-4"
+
+    def request():
+        chat = input("Ask me anything: ")
+        global completion
+
+        completion = openai.ChatCompletion.create(model=model, messages=[{"role": "user", "content": chat}])
+        print(completion.choices[0].message.content)
+        global gptcontinue
+        gptcontinue = input("Need anything else? ")
+        continueFunc()
+
+    def continueFunc():
+        if gptcontinue == "yes":
+            request()
+        else:
+            main(current_dir)
+
+    request()
 
 
-# Changes from 1.7.beta1.quickfix2
+
+
+# Changes from 1.7.beta2
 # ____________________________________________________________________
-# - Changed strings in Help
-# - Added separate help for UNIX based systems
-# - Removed TUI Task Manager
-# - Added DEBMAKER
-# - Modified Termithon Kernel to support OS Difference Commands (0.1.4)
-# - Added more strings in SYSINFO and DEVHELP
+# - Removed debmaker() {DIDN'T WORK}
+# - Added ChatGPT
 
-# Change Version Number in for ver()
-
-y = "1.7.beta2"
+y = "1.7.rc1"
 
 def ver():
     print("PyPrompt Version: " + y)
