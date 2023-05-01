@@ -67,12 +67,14 @@ import geocoder
 import wget
 import pyvim
 # 69 lines nice lol
-import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import requests
 import sys
 import pip
 import openai
+from bitcoinlib.wallets import *
+from bitcoinlib.wallets import Wallet
+import pathlib
 
 if uname.system == "Windows":
     from ctypes import *
@@ -182,6 +184,8 @@ BSOD                    (Cause a BSOD) Windows Only
 WIFIPASS                (Get the password from your WiFi) Windows Only
 LOCALHOSTER             (Create a localhost webserver via the terminal)
 CHATGPT                 (ChatGPT in a Terminal) Requires OpenAI
+BTCMAN                  (Bitcoin Manager)
+WORDLE                  (Wordle in a CLI App)
 
 '''
 
@@ -217,6 +221,8 @@ MAGIC8BALL              (A virtual Magic-8-Ball made in Python)
 CREDITS                 (Credits for all commands & dev list)
 LOCALHOSTER             (Create a localhost webserver via the terminal) (REAQUIRES A FILE NAMED test.html to runs)
 CHATGPT                 (ChatGPT in a Terminal)
+BTCMAN                  (Bitcoin Manager)
+WORDLE                  (Wordle in a CLI App)
 
 '''
 
@@ -352,8 +358,14 @@ def whatiscommand(current_dir):
     elif cmd == "localhoster":
         localhoster()
         main(current_dir)
-    elif cmd == "chatgpt" or "chatGPT" or "ChatGPT":
+    elif cmd == "chatgpt":
         chatGPT()
+        main(current_dir)
+    elif cmd == "btcman":
+        btcMan()
+        main(current_dir)
+    elif cmd == "wordle":
+        wordle()
         main(current_dir)
     elif str(cmd) in cmd:
         print("This MUST be a shell command in the OS else your command won't work!")
@@ -409,6 +421,7 @@ def calc():
     elif "*" in cmd:
         numbers = cmd.split()
         first_number = int(numbers[1])
+        # LMAO 420 lines
         second_number = int(numbers[3])
         print(first_number * second_number)
     elif cmd == "calc help":
@@ -462,7 +475,7 @@ def error():
     if (cmd == ""):
         main(current_dir)
     else:
-        # LMAO 420 lines
+        
         print("'" + str(cmd) + "'" + ''' is not recognized as an internal or external command''')
         print("For more help go to: https://github.com/joalricha869/PyPrompt or https://github.com/IdkDwij/Termithon")
         main(current_dir)
@@ -989,23 +1002,134 @@ def chatGPT():
         global gptcontinue
         gptcontinue = input("Need anything else? ")
         continueFunc()
-
+    # - 1000 LINES
     def continueFunc():
         if gptcontinue == "yes":
             request()
         else:
             main(current_dir)
 
+
     request()
 
+def btcMan():
+    BITCOIN_API_URL = 'https://api.coinmarketcap.com/v1/ticker/bitcoin/'
 
+    def get_latest_bitcoin_price():
+        response = requests.get(BITCOIN_API_URL)
+        response_json = response.json()
+        return float(response_json[0]['price_usd'])
+    
+    def create_new_wallet(wallet_name):
+        wallet = Wallet.create(wallet_name)
+        return wallet
 
+    def import_wallet(wallet_name, key):
+        wallet = Wallet.import_key(key, wallet_name)
+        return wallet
+
+    def display_wallet_info(wallet):
+        print("Wallet Name:", wallet.name)
+        print("Wallet ID:", wallet.wallet_id)
+        print("Address:", wallet.get_key().address())
+        print("Balance:", wallet.balance())
+
+    def app():
+        print("Welcome to the Bitcoin Manager Terminal App!")
+        while True:
+            print("\nChoose an option:")
+            print("1. Create a new wallet")
+            print("2. Import an existing wallet")
+            print("3. Display wallet information")
+            print("4. Get the latest Bitcoin price")
+            print("5. Exit")
+            
+            option = int(input("Enter the option number: "))
+            
+            if option == 1:
+                wallet_name = input("Enter a name for your new wallet: ")
+                wallet = create_new_wallet(wallet_name)
+                print("New wallet created!")
+            elif option == 2:
+                wallet_name = input("Enter a name for your wallet: ")
+                key = input("Enter your private key: ")
+                wallet = import_wallet(wallet_name, key)
+                print("Wallet imported!")
+            elif option == 3:
+                if wallet:
+                    display_wallet_info(wallet)
+                else:
+                    print("No wallet found. Please create or import a wallet first.")
+            elif option == 4:
+                price = get_latest_bitcoin_price()
+                print(f"The latest Bitcoin price is: \${price}")
+            elif option == 5:
+                print("Goodbye!")
+                break
+            else:
+                print("Invalid option. Please try again.")
+
+    app()
+
+def wordle():
+    WORDLIST = pathlib.Path("wordlist.txt")
+    words = [
+        word.upper()
+        for word in WORDLIST.read_text(encoding="utf-8").strip().split("\n")
+]
+    while True:
+        secret_word = random.choice(words)
+        attempts = 6
+        guessed_letters = []
+
+        print(term.bold("Welcome to Wordle!"))
+
+        while attempts > 0:
+            print(f"{term.bold}Attempts remaining: {attempts}")
+            guess = input("Enter a 5-letter word: ").upper()
+
+            if len(guess) != 5:
+                print(term.yellow("Please enter a 5-letter word."))
+                continue
+
+            if guess in guessed_letters:
+                print(term.yellow("You have already guessed this word."))
+                continue
+
+            guessed_letters.append(guess)
+            correct_positions = sum([g == s for g, s in zip(guess, secret_word)])
+            correct_letters = sum([g in secret_word for g in guess])
+
+            colored_guess = ""
+            for g, s in zip(guess, secret_word):
+                if g == s:
+                    colored_guess += term.green(g)
+                elif g in secret_word:
+                    colored_guess += term.yellow(g)
+                else:
+                    colored_guess += g
+
+            print(f"{colored_guess}\n")
+            attempts -= 1
+
+            if correct_positions == 5:
+                print(term.green(f"Congratulations! You guessed the word: {secret_word}"))
+                break
+
+        if attempts == 0:
+            print(term.red(f"Game Over! The secret word was: {secret_word}"))
+
+        play_again = input("Do you want to play again? (Y/N): ").upper()
+        if play_again != "Y":
+            break
 
 # Changes from 1.7.rc1
 # ____________________________________________________________________
-# - QUICK FIX: Fixed Linux Loophole
+# - QUICK FIX: Fixed Commands ALWAYS launching ChatGPT
+# - Added bitcoin manager
+# - Added Wordle
 
-y = "1.7.rc1.quickfix1"
+y = "1.7.rc2"
 
 def ver():
     print("PyPrompt Version: " + y)
