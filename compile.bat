@@ -1,0 +1,1 @@
+pyinstaller --add-data "C:/PyPromptDev/wordlist.txt:C:/PyPromptDev/wordlist.txt" --noconfirm --onefile --console --icon "C:/PyPromptDev/pyprompt.ico" --upx-dir "C:/upx"  "C:/PyPromptDev/main.py"

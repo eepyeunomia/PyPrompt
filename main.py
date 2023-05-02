@@ -72,9 +72,9 @@ import requests
 import sys
 import pip
 import openai
-from bitcoinlib.wallets import *
 from bitcoinlib.wallets import Wallet
 import pathlib
+import warnings
 
 if uname.system == "Windows":
     from ctypes import *
@@ -83,14 +83,23 @@ else:
 from blessed import *
 from blessed import Terminal
 
+try:
+    pass
+except Exception:
+    pass
 
 term = Terminal()
 
+warnings.simplefilter("ignore")
+warnings.filterwarnings("ignore")
+warnings.filterwarnings("ignore", category=FutureWarning)
 
 # Fixes 'distutils' error in PyInstaller
 if not sys.warnoptions:
     import warnings
     warnings.simplefilter("ignore")
+    warnings.filterwarnings("ignore")
+    warnings.filterwarnings("ignore", category=FutureWarning)
 
 # Checks if Python version is more than 3.9 (Will only take effect on uncompiled build)
 if sys.version_info < (3, 9):
@@ -1123,13 +1132,18 @@ def wordle():
         if play_again != "Y":
             break
 
-# Changes from 1.7.rc1
-# ____________________________________________________________________
-# - QUICK FIX: Fixed Commands ALWAYS launching ChatGPT
-# - Added bitcoin manager
-# - Added Wordle
 
-y = "1.7.rc2"
+
+btcfix = '''
+New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" `
+-Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
+'''
+
+# Changes from 1.7.rc2
+# ____________________________________________________________________
+# - BUG FIX (PyPrompt WON'T LAUNCH)
+
+y = "1.7.rc3"
 
 def ver():
     print("PyPrompt Version: " + y)
