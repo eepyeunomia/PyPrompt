@@ -145,7 +145,7 @@ def warnings():
     print(term.bold_red("|                                                                                 |"))
     print(term.bold_red("|_________________________________________________________________________________|"))
 # if not beta build disable 'warnings()'
-warnings()
+#warnings()
 print(" ")
 hostnamecomputer = socket.gethostname()
 global current_dir
@@ -1018,7 +1018,6 @@ def chatGPT():
         else:
             main(current_dir)
 
-
     request()
 
 def btcMan():
@@ -1082,6 +1081,12 @@ def btcMan():
 
 def wordle():
     WORDLIST = pathlib.Path("wordlist.txt")
+    if os.path.isfile(WORDLIST):
+        pass
+    else:
+        print("You require the wordlist to continue")
+        print("Returning to Terminal")
+        main(current_dir)
     words = [
         word.upper()
         for word in WORDLIST.read_text(encoding="utf-8").strip().split("\n")
@@ -1139,11 +1144,13 @@ New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" `
 -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
 '''
 
-# Changes from 1.7.rc2
-# ____________________________________________________________________
-# - BUG FIX (PyPrompt WON'T LAUNCH)
 
-y = "1.7.rc3"
+
+# Changes from 1.7.rc3
+# ____________________________________________________________________
+# - BUG FIXES (READY TO RELEASE)
+
+y = "1.7.stable"
 
 def ver():
     print("PyPrompt Version: " + y)
