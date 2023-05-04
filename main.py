@@ -417,6 +417,7 @@ def calc():
         first_number = float(numbers[1])
         second_number = float(numbers[3])
         print(first_number + second_number)
+        # LMAO 420 lines
     elif "-" in cmd:
         numbers = cmd.split()
         first_number = float(numbers[1])
@@ -430,7 +431,6 @@ def calc():
     elif "*" in cmd:
         numbers = cmd.split()
         first_number = int(numbers[1])
-        # LMAO 420 lines
         second_number = int(numbers[3])
         print(first_number * second_number)
     elif cmd == "calc help":
@@ -997,6 +997,7 @@ def chatGPT():
         print("Options: 'gpt3' | 'gpt4'")
         global model
         model = input("Which model will you use? ")
+        # - 1000 LINES
         if model == "gpt3":
             model = "gpt-3.5-turbo"
         elif model == "gpt4":
@@ -1011,7 +1012,6 @@ def chatGPT():
         global gptcontinue
         gptcontinue = input("Need anything else? ")
         continueFunc()
-    # - 1000 LINES
     def continueFunc():
         if gptcontinue == "yes":
             request()
@@ -1146,11 +1146,11 @@ New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" `
 
 
 
-# Changes from 1.7.rc3
+# Changes from 1.7.stable
 # ____________________________________________________________________
-# - BUG FIXES (READY TO RELEASE)
+# - QUICK FIX: PyPrompt wouldn't launch
 
-y = "1.7.stable"
+y = "1.7.quickfix1"
 
 def ver():
     print("PyPrompt Version: " + y)

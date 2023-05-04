@@ -22,6 +22,10 @@
    "value": "C:/PyPromptDev/pyprompt.ico"
   },
   {
+   "optionDest": "upx_dir",
+   "value": "C:/upx"
+  },
+  {
    "optionDest": "ascii",
    "value": false
   },
@@ -70,8 +74,12 @@
    "value": false
   },
   {
-   "optionDest": "pathex",
-   "value": "C:/PyPromptDev"
+   "optionDest": "datas",
+   "value": "C:/PyPromptDev/wordlist.txt;."
+  },
+  {
+   "optionDest": "excludes",
+   "value": "tkinter"
   }
  ],
  "nonPyinstallerOptions": {
