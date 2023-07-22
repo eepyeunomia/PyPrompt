@@ -70,9 +70,7 @@ import pyvim
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import requests
 import sys
-import pip
 import openai
-from bitcoinlib.wallets import Wallet
 import pathlib
 import warnings
 
@@ -82,6 +80,11 @@ else:
   pass
 from blessed import *
 from blessed import Terminal
+
+try:
+    pass
+except Warning:
+    pass
 
 try:
     pass
@@ -145,7 +148,7 @@ def warnings():
     print(term.bold_red("|                                                                                 |"))
     print(term.bold_red("|_________________________________________________________________________________|"))
 # if not beta build disable 'warnings()'
-#warnings()
+warnings()
 print(" ")
 hostnamecomputer = socket.gethostname()
 global current_dir
