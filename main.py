@@ -370,9 +370,6 @@ def whatiscommand(current_dir):
     elif cmd == "chatgpt":
         chatGPT()
         main(current_dir)
-    elif cmd == "btcman":
-        btcMan()
-        main(current_dir)
     elif cmd == "wordle":
         wordle()
         main(current_dir)
@@ -1020,65 +1017,6 @@ def chatGPT():
 
     request()
 
-def btcMan():
-    BITCOIN_API_URL = 'https://api.coinmarketcap.com/v1/ticker/bitcoin/'
-
-    def get_latest_bitcoin_price():
-        response = requests.get(BITCOIN_API_URL)
-        response_json = response.json()
-        return float(response_json[0]['price_usd'])
-    
-    def create_new_wallet(wallet_name):
-        wallet = Wallet.create(wallet_name)
-        return wallet
-
-    def import_wallet(wallet_name, key):
-        wallet = Wallet.import_key(key, wallet_name)
-        return wallet
-
-    def display_wallet_info(wallet):
-        print("Wallet Name:", wallet.name)
-        print("Wallet ID:", wallet.wallet_id)
-        print("Address:", wallet.get_key().address())
-        print("Balance:", wallet.balance())
-
-    def app():
-        print("Welcome to the Bitcoin Manager Terminal App!")
-        while True:
-            print("\nChoose an option:")
-            print("1. Create a new wallet")
-            print("2. Import an existing wallet")
-            print("3. Display wallet information")
-            print("4. Get the latest Bitcoin price")
-            print("5. Exit")
-            
-            option = int(input("Enter the option number: "))
-            
-            if option == 1:
-                wallet_name = input("Enter a name for your new wallet: ")
-                wallet = create_new_wallet(wallet_name)
-                print("New wallet created!")
-            elif option == 2:
-                wallet_name = input("Enter a name for your wallet: ")
-                key = input("Enter your private key: ")
-                wallet = import_wallet(wallet_name, key)
-                print("Wallet imported!")
-            elif option == 3:
-                if wallet:
-                    display_wallet_info(wallet)
-                else:
-                    print("No wallet found. Please create or import a wallet first.")
-            elif option == 4:
-                price = get_latest_bitcoin_price()
-                print(f"The latest Bitcoin price is: \${price}")
-            elif option == 5:
-                print("Goodbye!")
-                break
-            else:
-                print("Invalid option. Please try again.")
-
-    app()
-
 def wordle():
     WORDLIST = pathlib.Path("wordlist.txt")
     if os.path.isfile(WORDLIST):
@@ -1146,11 +1084,12 @@ New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" `
 
 
 
-# Changes from 1.7.stable
+# Changes from 1.7.quickfix1
 # ____________________________________________________________________
-# - QUICK FIX: PyPrompt wouldn't launch
+# - finally alive for a month :skull:
+# - Hopefully this boots up again
 
-y = "1.7.quickfix1"
+y = "1.7.1.beta1"
 
 def ver():
     print("PyPrompt Version: " + y)
