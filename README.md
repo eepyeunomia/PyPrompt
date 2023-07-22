@@ -15,7 +15,7 @@ A replacement multiplatform terminal built in Python.
 
 For version 2.0 of PyPrompt, I am planning to make new engine NOT based on Termithon for once!
 
-When v2 releases, this repo will be read only and archived!
+When v2 releases, this repo will be read only and archived! (update july 2023: maybe ill abandon this idek bro)
 
 ## Run this in your PC
 
