@@ -196,7 +196,6 @@ BSOD                    (Cause a BSOD) Windows Only
 WIFIPASS                (Get the password from your WiFi) Windows Only
 LOCALHOSTER             (Create a localhost webserver via the terminal)
 CHATGPT                 (ChatGPT in a Terminal) Requires OpenAI
-BTCMAN                  (Bitcoin Manager)
 WORDLE                  (Wordle in a CLI App)
 
 '''
@@ -642,7 +641,6 @@ def pyCompiler():
 
 def testModules():
     print(pyvim.__version__)
-    print(pip.__version__)
 
 
 def ezformatter():
@@ -1087,12 +1085,11 @@ New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" `
 
 
 
-# Changes from 1.7.quickfix1
+# Changes from 1.7.beta1
 # ____________________________________________________________________
-# - finally alive for a month :skull:
-# - Hopefully this boots up again
+# - QUICKFIX: Removed all mentions of BTCMAN
 
-y = "1.7.1.beta1"
+y = "1.7.1.beta1.quickfix1"
 
 def ver():
     print("PyPrompt Version: " + y)
