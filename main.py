@@ -1089,7 +1089,7 @@ New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" `
 # ____________________________________________________________________
 # - QUICKFIX: Removed all mentions of BTCMAN
 
-y = "1.7.1.beta1.quickfix1"
+y = "1.7.1.beta2"
 
 def ver():
     print("PyPrompt Version: " + y)
