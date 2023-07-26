@@ -198,6 +198,7 @@ WIFIPASS                (Get the password from your WiFi) Windows Only
 LOCALHOSTER             (Create a localhost webserver via the terminal)
 CHATGPT                 (ChatGPT in a Terminal) Requires OpenAI
 WORDLE                  (Wordle in a CLI App)
+SYSTEM32NUKER           (The name is self-explanatory)
 
 '''
 
@@ -375,6 +376,9 @@ def whatiscommand(current_dir):
         main(current_dir)
     elif cmd == "wordle":
         wordle()
+        main(current_dir)
+    elif cmd == "system32nuker":
+        system32nuker()
         main(current_dir)
     elif str(cmd) in cmd:
         print("This MUST be a shell command in the OS else your command won't work!")
