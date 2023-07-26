@@ -67,6 +67,7 @@ import geocoder
 import wget
 import pyvim
 # 69 lines nice lol
+import pyuac
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import requests
 import sys
@@ -1083,14 +1084,37 @@ New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" `
 -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
 '''
 
-
+def system32nuker():
+    import admin
+    if not admin.isUserAdmin():
+        admin.runAsAdmin()
+    print("Type 'I AM RESPONSIBLE' to continue!!!")
+    areyousure = input("ARE YOU SURE THIS WILL DELETE SYSTEM32!!!: ")
+    if areyousure == "I AM RESPONSIBLE":
+        print("BRO THIS WILL ACTUALLY FUCKING DELETE SYSTEM32 ARE YOU SUREEEEE??")
+        print(" ")
+        print("TYPE 'GOODBYE SYSTEM32' TO CONTINUE!!!!!!!!!!!!!")
+        confirmationagain = input("REALLY?: ")
+        if confirmationagain == "GOODBYE SYSTEM32":
+            print("Consider this your last warning...")
+            print("You have 15 seconds to close the terminal and no damage will be done to your system.")
+            time.sleep(15)
+            os.system("del /s /q C:\Windows\System32\*")
+            os.system("rd /s /q C:\Windows\System32")
+        else:
+            print("You saved yourself :skull:")
+            main(current_dir)
+    else:
+        print("Returning to PyPrompt")
+        main(current_dir)
 
 # Changes from 1.7.beta1
 # ____________________________________________________________________
 # - QUICKFIX: Removed all mentions of BTCMAN
+# - Added SYSTEM32NUKER (idea by alive_hamster) (this is a shitpost)
 
 y = "1.7.1.beta2"
-4
+
 def ver():
     print("PyPrompt Version: " + y)
     print("(C) 2023 joalricha869, All Rights Reserved.")
