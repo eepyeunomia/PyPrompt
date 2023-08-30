@@ -1,0 +1,26 @@
+# Add a .gitignore file to make sure no files are cluttered
+# when pushing to the git repo. I'm not here to teach you git, so it's your job
+# to find out what this file does.
+
+# Folder: output
+output
+output/
+output/*
+
+# Folder: build
+build
+build/
+build/*
+
+# Folder: pyinstaller
+Pyinstaller
+Pyinstaller/
+Pyinstaller/*
+
+# Folder: site-packages
+site-packages
+site-packages/
+site-packages/*
+
+# Dotfile: exe
+*.exe
