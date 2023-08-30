@@ -42,3 +42,5 @@ wordlist.txt
 bitcoinlib
 bitcoinlib/
 bitcoinlib/*
+win32api
+upx*
