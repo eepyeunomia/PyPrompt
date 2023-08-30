@@ -24,3 +24,21 @@ site-packages/*
 
 # Dotfile: exe
 *.exe
+
+# A lot of stuff: I can't oraganize all of this
+.vs
+.vs/
+.vs/*
+__pycache__
+__pycache__/
+__pycache__/*
+*.pyc
+test.html
+settings.json
+wordlist.txt
+# I mean what the heck even is worldlist ( wordlist)
+*.ico
+*.spec
+bitcoinlib
+bitcoinlib/
+bitcoinlib/*
