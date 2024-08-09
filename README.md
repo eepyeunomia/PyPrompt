@@ -1,6 +1,6 @@
 # PyPrompt 
 
-A replacement multiplatform terminal built in Python. 
+~~A replacement multiplatform terminal built in Python.~~ The most useless terminal ever.
 
 ![pyprompt](https://user-images.githubusercontent.com/83835381/229126548-31d2ed01-cd67-43e5-a839-dea50ca394af.jpg)
 
