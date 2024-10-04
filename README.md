@@ -1,4 +1,4 @@
-# PyPrompt 
+# ~~PyPrompt~~ GarbagePrompt (this is gonna die. do NOT use this)
 
 ~~A replacement multiplatform terminal built in Python.~~ The most useless terminal ever.
 
@@ -11,17 +11,19 @@
 <a href="https://render.com/deploy?repo=https://github.com/joalricha869/PyPrompt"><img alt="Deploy to Render" src="https://binbashbanana.github.io/deploy-buttons/buttons/remade/render.svg"></a>
 
 
-### Engine based on [Termithon | idkDwij](https://github.com/IdkDwij/Termithon)
+### ~~Based on~~ Stole from [Termithon | idkDwij](https://github.com/IdkDwij/Termithon)
 
-For version 2.0 of PyPrompt, I am planning to make new engine NOT based on Termithon for once!
+~~For version 2.0 of PyPrompt, I am planning to make the shell NOT based on Termithon for once!~~ 
 
-When v2 releases, this repo will be read only and archived! (update july 2023: maybe ill abandon this idek bro)
+~~When v2 releases~~, this repo will be ~~read only and archived!~~ ERASED. (update july 2023: maybe ill abandon this idek bro)
 
-## Run this in your PC
+Update october 2024: yeah this is dead.
+
+## Run this in your PC (do not.)
 
 #### PYPROMPT DEVELOPMENT, BETA BUILDS, UNCOMPILED BUILDS
 
-Install [Python](https://python.org) and [Visual Studio Code](https://code.visualstudio.com) (ONLY FOR PYPROMPT DEVELOPMENT)
+Install [Python](https://python.org) and [Visual Studio Code](https://code.visualstudio.com) ~~(ONLY FOR PYPROMPT DEVELOPMENT)~~
 
 
 #### STABLE VERSIONS (CURRENTLY ON 1.6.1)
@@ -38,12 +40,13 @@ locate your downloaded release (pyprompt.exe) and copy it to the root of your C 
 
 ### What happened to PyPrompt Development Kit?
 
-Just get the source code from here and use the stable release that includes pyinstaller and auto py to exe (requires python + required modules) to compile your own version! Make sure to download the speedtest.py file in this repo to compile with Pyinstaller.
+~~Just get the source code from here and use the stable release that includes pyinstaller and auto py to exe (requires python + required modules) to compile your own version! Make sure to download the speedtest.py file in this repo to compile with Pyinstaller.~~
 
+why does a termial need a development kit to begin with smh.
 
 ## Features:
 
-There's a lot...
+There's a lot... ~~that might or might not work~~
 
 ```
 '''
@@ -99,9 +102,9 @@ CHATGPT                 (ChatGPT in a Terminal) Requires OpenAI
 
 Windows: Supports Windows 10 or 8.1
 
-Linux: IT'S HERE!!! CHECK THE RELEASES FOR 1.7.beta1 (.deb and .rpm coming soon!)
+Linux: IT'S HERE!!! CHECK THE RELEASES FOR 1.7.beta1 (.deb and .rpm coming ~~soon!~~ NEVER)
 
-macOS: There is no current build now (yet)
+macOS: There is no current build now (~~yet~~ NEVERRRRRRRRRRRRRRRRRRRRRRRRRRR)
 
 ## Contributing
 Anyone can contribute with this project! Just open up an issue or pull request and I will review what you will be adding/removing/changing and might add it in. 
@@ -113,15 +116,15 @@ Anyone can contribute with this project! Just open up an issue or pull request a
 
 ## Credits
 
-PYPROMPT v1.6.1 CREDITS:
+~~PYPROMPT v1.6.1 CREDITS~~ PEOPLE WHO I STOLE CODE FROM YIPPEEEEEEEEEEEE:
 
-Developer / Maker: joalricha869 | https://github.com/joalricha869
+Developer / Maker: ~~joalricha869~~ eepyEunomia | ~~https://github.com/joalricha869~~ https://github.com/eepyeunomia
 
 Termithon Kernel: idkDwij | https://github.com/idkDwij | https://github.com/idkDwij/Termithon
 
 CLI Calculator FIX: BigBoyTaco | https://github.com/BigBoyTaco | https://github.com/AnotherLumenGames
 
-Command Credits:
+~~Command Credits~~ If you see yourself here, 14 year old me robbed from you:
 
 WEATHER        |        Made by imkaka                | https://github.com/imkaka
 
