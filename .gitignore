@@ -1,0 +1,46 @@
+# Add a .gitignore file to make sure no files are cluttered
+# when pushing to the git repo. I'm not here to teach you git, so it's your job
+# to find out what this file does.
+
+# Folder: output
+output
+output/
+output/*
+
+# Folder: build
+build
+build/
+build/*
+
+# Folder: pyinstaller
+Pyinstaller
+Pyinstaller/
+Pyinstaller/*
+
+# Folder: site-packages
+site-packages
+site-packages/
+site-packages/*
+
+# Dotfile: exe
+*.exe
+
+# A lot of stuff: I can't oraganize all of this
+.vs
+.vs/
+.vs/*
+__pycache__
+__pycache__/
+__pycache__/*
+*.pyc
+test.html
+settings.json
+wordlist.txt
+# I mean what the heck even is worldlist ( wordlist)
+*.ico
+*.spec
+bitcoinlib
+bitcoinlib/
+bitcoinlib/*
+win32api
+upx*

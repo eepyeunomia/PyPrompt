@@ -1,1 +1,0 @@
-C:\Users\{your user}\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10{idk}\LocalCache\local-packages\Python310\site-packages\bitcoinlib\config
